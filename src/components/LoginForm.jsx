@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import logo from "src/assets/icons/logo.png";
 
+import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
+
 import Filled_Warning from "src/assets/icons/Icon_Filled_Error.svg?react";
-import { Link } from "react-router-dom";
 
 const validate = (values) => {
   const errors = {};
@@ -27,6 +29,7 @@ const validate = (values) => {
 export default function LoginForm() {
   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState({ login: "", password: "" });
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: data,
@@ -90,7 +93,7 @@ export default function LoginForm() {
             <input
               id="password"
               name="password"
-              type="password"
+              type={isShowPassword ? "text" : "password"}
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.password}
@@ -103,6 +106,16 @@ export default function LoginForm() {
             >
               Password
             </label>
+            <div
+              className="absolute right-3 top-1/2 translate-y-[-50%]"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? (
+                <FaRegEye size={24} />
+              ) : (
+                <FaRegEyeSlash size={24} />
+              )}
+            </div>
           </div>
           {formik.touched.password && formik.errors.password ? (
             <div className="flex items-center gap-1 text-xs text-red-600">
