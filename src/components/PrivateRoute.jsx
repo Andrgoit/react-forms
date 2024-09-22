@@ -1,16 +1,10 @@
-import { useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 
-export default function PrivateRoute() {
-  // eslint-disable-next-line no-unused-vars
-  const [isLogin, setIsLogin] = useState(true);
+export default function PrivateRoute({ children, user }) {
+  console.log("user- privatRoute", user);
 
-  if (!isLogin) {
+  if (!user) {
     return <Navigate to="/login" />;
   }
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  return children ? children : <Outlet />;
 }

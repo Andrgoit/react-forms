@@ -8,21 +8,30 @@ import {
   NotFoundPage,
 } from "./pages";
 
-import { PrivateRoute } from "./components";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <PrivateRoute />,
-    errorElement: <NotFoundPage />,
-    children: [{ index: true, element: <HomePage /> }],
-  },
-  { path: "/login", element: <LoginPage /> },
-  { path: "/register", element: <RegisterPage /> },
-  { path: "/forgotPassword", element: <ForgoPasswordPage /> },
-]);
+import { PrivateRoute, PublicRoute } from "./components";
+import { useState } from "react";
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useState(false);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <PrivateRoute user={user} />,
+      errorElement: <NotFoundPage />,
+      children: [{ index: true, element: <HomePage /> }],
+    },
+    {
+      element: <PublicRoute user={user} />,
+      errorElement: <NotFoundPage />,
+      children: [
+        { path: "/login", element: <LoginPage /> },
+        { path: "/register", element: <RegisterPage /> },
+        { path: "/forgotPassword", element: <ForgoPasswordPage /> },
+      ],
+    },
+  ]);
   return (
     <>
       <RouterProvider router={router} />
@@ -31,15 +40,3 @@ function App() {
 }
 
 export default App;
-
-// <div className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-gradient-to-br from-[#1CB5E0] to-[#000851]">
-//   <h1
-//     className="text-4xl font-bold text-white"
-//     style={{ textShadow: "2px 2px 4px black" }}
-//   >
-//     Vite + React + Tailwind
-//   </h1>
-//   <a href="https://github.com/Andrgoit/react-template" target="_blank">
-//     <img src={github} alt="github icon" />
-//   </a>
-// </div>
