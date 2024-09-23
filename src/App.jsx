@@ -15,6 +15,8 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState(false);
 
+  const handlerRegisteredUser = () => setUser(true);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -27,7 +29,10 @@ function App() {
       errorElement: <NotFoundPage />,
       children: [
         { path: "/login", element: <LoginPage /> },
-        { path: "/register", element: <RegisterPage /> },
+        {
+          path: "/register",
+          element: <RegisterPage onRegister={handlerRegisteredUser} />,
+        },
         { path: "/forgotPassword", element: <ForgoPasswordPage /> },
       ],
     },

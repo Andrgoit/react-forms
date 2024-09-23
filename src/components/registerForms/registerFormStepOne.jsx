@@ -7,22 +7,12 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import Filled_Warning from "src/assets/icons/Icon_Filled_Error.svg?react";
 import errorIcon from "src/assets/icons/Error.png";
 
-export default function RegisterFormStepOne() {
-  // eslint-disable-next-line no-unused-vars
-  const [data, setData] = useState({
-    login: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    confirmPassword: "",
-  });
+export default function RegisterFormStepOne({ nextStep, updateData }) {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
-  const [isClickContinueBtn, setIsClickContinueBtn] = useState(false);
+  const [isClickedContinueBtn, setIsClickedContinueBtn] = useState(false);
   const [errors, setErrors] = useState(false);
   const errorCounts = Object.keys(errors).length;
-
-  console.log("errorCounts", errorCounts);
 
   const validate = (values) => {
     const errors = {};
@@ -61,19 +51,28 @@ export default function RegisterFormStepOne() {
   };
 
   const formik = useFormik({
-    initialValues: data,
+    initialValues: {
+      login: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+      confirmPassword: "",
+    },
     validate,
+
     onSubmit: (values) => {
       console.log(values);
-      setIsClickContinueBtn(false);
 
-      formik.resetForm({
-        login: "",
-        firstName: "",
-        lastName: "",
-        password: "",
-        confirmPassword: "",
-      });
+      setIsClickedContinueBtn(false);
+      updateData(values);
+      nextStep();
+      // formik.resetForm({
+      //   login: "",
+      //   firstName: "",
+      //   lastName: "",
+      //   password: "",
+      //   confirmPassword: "",
+      // });
     },
   });
 
@@ -95,7 +94,7 @@ export default function RegisterFormStepOne() {
     >
       <p className="text-xl">Sign up</p>
       <div className="flex w-full items-center justify-between font-medium">
-        {isClickContinueBtn && errorCounts ? (
+        {isClickedContinueBtn && errorCounts ? (
           <div className="mr-1 flex h-10 w-10 min-w-10 items-center justify-center rounded-full bg-[#E6674E]">
             <img src={errorIcon} alt="" />
           </div>
@@ -277,7 +276,7 @@ export default function RegisterFormStepOne() {
         </div>
 
         <button
-          onClick={() => setIsClickContinueBtn(true)}
+          onClick={() => setIsClickedContinueBtn(true)}
           type="submit"
           className="mt-8 inline-block w-full max-w-full cursor-pointer rounded-lg border bg-[#6168E4] py-4 text-white transition-colors duration-300 hover:bg-[#3d43b9]"
         >
