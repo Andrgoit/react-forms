@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
-import { motion } from "framer-motion";
-
 import ok from "src/assets/icons/ok.png";
 
 export default function RegisterFormStepFour({ nextStep, updateData }) {
@@ -23,12 +21,7 @@ export default function RegisterFormStepFour({ nextStep, updateData }) {
   });
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8 }}
-      className="flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-5 rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm"
-    >
+    <div className="flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-5 rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm">
       <p className="text-xl">Sign up</p>
       <div className="flex w-full items-center justify-between font-medium">
         <div className="relative mr-1 flex h-10 w-10 min-w-10 items-center justify-center rounded-full bg-[#6168E4]">
@@ -169,6 +162,6 @@ export default function RegisterFormStepFour({ nextStep, updateData }) {
           Login
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 }

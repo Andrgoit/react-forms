@@ -1,14 +1,8 @@
-import { motion } from "framer-motion";
 import success from "src/assets/image/Success.png";
 
 export default function RegisterFormStepFive({ onRegister }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8 }}
-      className="flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-5 rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm"
-    >
+    <div className="flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-5 rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm">
       <p className="text-xl">Sign up</p>
       <img src={success} alt="" />
       <h2 className="text-2xl font-bold text-black">Account created</h2>
@@ -30,6 +24,6 @@ export default function RegisterFormStepFive({ onRegister }) {
           Go to the Chat
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 }

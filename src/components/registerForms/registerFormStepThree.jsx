@@ -1,19 +1,13 @@
-import { motion } from "framer-motion";
 import ok from "src/assets/icons/ok.png";
-
 import editIcon from "src/assets/icons/editButton.png";
+import profileIcon from "src/assets/icons/profileUser.svg";
 
 export default function RegisterFormStepThree({ nextStep, prevStep, data }) {
   console.log("data RegisterFormStepThree", data);
   const { imageURL } = data;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8 }}
-      className="flex h-full w-full max-w-[400px] justify-center rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm"
-    >
+    <div className="flex h-full w-full max-w-[400px] justify-center rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm">
       <div className="flex h-full w-full flex-col items-center justify-center gap-5 bg-white">
         <p className="text-xl">Sign up</p>
         <div className="flex w-full items-center justify-between font-medium">
@@ -38,7 +32,7 @@ export default function RegisterFormStepThree({ nextStep, prevStep, data }) {
           <div className="relative">
             <div className="h-[160px] w-[160px] overflow-hidden rounded-full">
               <img
-                src={imageURL}
+                src={imageURL ? imageURL : profileIcon}
                 alt="user avatar"
                 className="h-full w-full object-fill"
               />
@@ -59,6 +53,6 @@ export default function RegisterFormStepThree({ nextStep, prevStep, data }) {
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

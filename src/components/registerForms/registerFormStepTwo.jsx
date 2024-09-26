@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import ok from "src/assets/icons/ok.png";
 import uploadIcon from "src/assets/icons/uploadIcon.png";
+import profileIcon from "src/assets/icons/profileUser.svg";
 
 export default function RegisterFormStepTwo({ nextStep, updateData }) {
   const [avatar, setAvatar] = useState(null);
@@ -32,17 +32,16 @@ export default function RegisterFormStepTwo({ nextStep, updateData }) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8 }}
-      className="flex h-full w-full max-w-[400px] justify-center rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm"
-    >
+    <div className="flex h-full w-full max-w-[400px] justify-center rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm">
       {avatar ? (
         <div className="flex h-full w-full flex-col items-center justify-center gap-5 bg-white">
           <p className="text-xl">Edit photo</p>
           <div className="flex h-[400px] w-full bg-slate-500">
-            <img src={imageURL} alt="user avatar" className="w-full" />
+            <img
+              src={imageURL ? imageURL : profileIcon}
+              alt="user avatar"
+              className="w-full"
+            />
           </div>
 
           <form
@@ -111,6 +110,6 @@ export default function RegisterFormStepTwo({ nextStep, updateData }) {
           </form>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }

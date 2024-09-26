@@ -12,9 +12,7 @@ import { PrivateRoute, PublicRoute } from "./components";
 import { useState } from "react";
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState(false);
-
   const handlerRegisteredUser = () => setUser(true);
 
   const router = createBrowserRouter([
@@ -22,7 +20,7 @@ function App() {
       path: "/",
       element: <PrivateRoute user={user} />,
       errorElement: <NotFoundPage />,
-      children: [{ index: true, element: <HomePage /> }],
+      children: [{ index: true, element: <HomePage user={user} /> }],
     },
     {
       element: <PublicRoute user={user} />,

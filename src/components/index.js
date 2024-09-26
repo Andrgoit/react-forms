@@ -6,6 +6,7 @@ import RegisterFormStepTwo from "./registerForms/registerFormStepTwo";
 import RegisterFormStepThree from "./registerForms/registerFormStepThree";
 import RegisterFormStepFour from "./registerForms/registerFormStepFour";
 import RegisterFormStepFive from "./registerForms/registerFormStepFive";
+import ForgotPasswordFormStepOne from "./ForgotPasswordForms/ForgotPasswordFormStepOne";
 
 export {
   PrivateRoute,
@@ -16,4 +17,5 @@ export {
   RegisterFormStepThree,
   RegisterFormStepFour,
   RegisterFormStepFive,
+  ForgotPasswordFormStepOne,
 };
