@@ -1,20 +1,58 @@
 import { useState } from "react";
-import { ForgotPasswordFormStepOne } from "src/components";
+
+import {
+  ForgotPasswordFormStepOne,
+  ForgotPasswordFormStepTwo,
+  ForgotPasswordFormStepThree,
+  ForgotPasswordFormStepFour,
+} from "src/components";
 
 export default function ForgotPasswordPage() {
   const [step, setStep] = useState(0);
-  // const [data, setData] = useState({});
+  const [data, setData] = useState(null);
+  const [code, setCode] = useState(null);
+
+  console.log("data", data);
+
+  const getCodeNumber = (code) => setCode(code);
+  console.log("code", code);
+
+  const updateData = (newData) => {
+    setData((prev) => ({ ...prev, ...newData }));
+  };
 
   const handlerClickNextStep = () => {
     setStep((prev) => prev + 1);
   };
-  // const handlerClickPrevStep = () => {
-  //   setStep((prev) => prev - 1);
-  // };
+
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-gradient-to-br from-[#1ce08e] to-[#480051]">
       {step === 0 ? (
-        <ForgotPasswordFormStepOne nextStep={handlerClickNextStep} />
+        <ForgotPasswordFormStepOne
+          nextStep={handlerClickNextStep}
+          getCodeNumber={getCodeNumber}
+          updateData={updateData}
+        />
+      ) : null}
+
+      {step === 1 ? (
+        <ForgotPasswordFormStepTwo
+          nextStep={handlerClickNextStep}
+          verificationCode={code}
+          data={data}
+        />
+      ) : null}
+      {step === 2 ? (
+        <ForgotPasswordFormStepThree
+          nextStep={handlerClickNextStep}
+          updateData={updateData}
+        />
+      ) : null}
+      {step === 3 ? (
+        <ForgotPasswordFormStepFour
+          nextStep={handlerClickNextStep}
+          updateData={updateData}
+        />
       ) : null}
     </div>
   );

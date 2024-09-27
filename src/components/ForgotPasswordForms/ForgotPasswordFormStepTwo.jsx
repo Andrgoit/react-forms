@@ -1,48 +1,34 @@
-import { Link } from "react-router-dom";
 import { useFormik } from "formik";
+// import { useState } from "react";
 import { motion } from "framer-motion";
-import { toast } from "react-toastify";
-import randomNumbersGenerator from "src/utils/randomNumbersGenerator";
 
 import Filled_Warning from "src/assets/icons/Icon_Filled_Error.svg?react";
 
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.email) {
-    errors.login = "This field cannot be empty";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
-  }
-
-  return errors;
-};
-
-export default function ForgotPasswordFormStepOne({
+export default function ForgotPasswordFormStepTwo({
   nextStep,
-  getCodeNumber,
-  updateData,
+  data,
+  verificationCode,
 }) {
-  const generatedCode = randomNumbersGenerator();
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.code) {
+      errors.code = "This field cannot be empty";
+    } else if (Number(values.code) !== verificationCode) {
+      errors.code = "Invalid verification code";
+    }
+
+    return errors;
+  };
 
   const formik = useFormik({
-    initialValues: { email: "test@test.com" },
+    initialValues: { ...data, code: "" },
     validate,
-    onSubmit: (values) => {
-      updateData(values);
-      console.log(values);
-
-      // formik.resetForm({
-      //   login: "",
-      //   password: "",
-      // });
+    onSubmit: () => {
+      nextStep();
     },
   });
 
-  const handlerOnclickResetPasswordBtn = (code) => {
-    toast.success(`<${formik.values.email}>:Your code: ${code}`);
-    getCodeNumber(code);
-  };
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
@@ -52,10 +38,9 @@ export default function ForgotPasswordFormStepOne({
     >
       <p className="text-xl">Password reset</p>
 
-      <h1 className="text-3xl font-bold">Forgot your password? </h1>
+      <h1 className="text-3xl font-bold">Enter code</h1>
       <p className="text-center text-base text-[#65697E]">
-        No worries! Enter your account email, and we’ll send you verification
-        code to reset.
+        Please check your email and provide the verification code
       </p>
       <form
         onSubmit={formik.handleSubmit}
@@ -70,7 +55,8 @@ export default function ForgotPasswordFormStepOne({
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.email}
-              // autoComplete="off"
+              autoComplete="off"
+              disabled={data}
               className={`w-full rounded-lg border ${formik.values.email ? "[&+label]:top-2 [&:valid+label]:text-xs" : ""} border-[#A5A8BA] p-4 text-black outline-[#6168E4] transition-all duration-300 [&:focus+label]:top-2 [&:focus+label]:text-xs ${formik.touched.email && formik.errors.email ? "border-[2px] border-red-600" : "border-[2px] border-[#6168E4]"} `}
             />
             <label
@@ -88,24 +74,41 @@ export default function ForgotPasswordFormStepOne({
           ) : null}
         </div>
 
+        <div className="w-full">
+          <div className="relative w-full">
+            <input
+              id="code"
+              name="code"
+              type="text"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.code}
+              autoComplete="off"
+              placeholder="_ _ _"
+              className={`w-full rounded-lg border ${formik.values.code ? "[&+label]:top-2 [&:valid+label]:text-xs" : ""} border-[#A5A8BA] p-4 text-black outline-[#6168E4] transition-all duration-300 [&:focus+label]:top-2 [&:focus+label]:text-xs ${formik.touched.code && formik.errors.code ? "border-[2px] border-red-600" : "border-[2px] border-[#6168E4]"} `}
+            />
+            <label
+              htmlFor="code"
+              className="absolute left-4 top-1/2 translate-y-[-50%] text-[#65697E] transition-all duration-300"
+            >
+              Verification Code
+            </label>
+          </div>
+          {formik.touched.code && formik.errors.code ? (
+            <div className="flex items-center gap-1 text-xs text-red-600">
+              <Filled_Warning />
+              {formik.errors.code}
+            </div>
+          ) : null}
+        </div>
+
         <button
           type="submit"
-          onClick={() => handlerOnclickResetPasswordBtn(generatedCode)}
           className="mt-8 inline-block w-full max-w-full cursor-pointer rounded-lg border bg-[#6168E4] py-4 text-white transition-colors duration-300 hover:bg-[#3d43b9]"
         >
-          Reset password
+          Confirm code
         </button>
       </form>
-      <div className="flex justify-center gap-1 font-semibold">
-        <p>Already have a verification? </p>
-        <Link
-          to="#"
-          className="cursor-pointer text-[#0066CC]"
-          onClick={nextStep}
-        >
-          Enter code
-        </Link>
-      </div>
     </motion.div>
   );
 }

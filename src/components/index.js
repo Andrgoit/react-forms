@@ -7,6 +7,9 @@ import RegisterFormStepThree from "./registerForms/registerFormStepThree";
 import RegisterFormStepFour from "./registerForms/registerFormStepFour";
 import RegisterFormStepFive from "./registerForms/registerFormStepFive";
 import ForgotPasswordFormStepOne from "./ForgotPasswordForms/ForgotPasswordFormStepOne";
+import ForgotPasswordFormStepTwo from "./ForgotPasswordForms/ForgotPasswordFormStepTwo";
+import ForgotPasswordFormStepThree from "./ForgotPasswordForms/ForgotPasswordFormStepThree";
+import ForgotPasswordFormStepFour from "./ForgotPasswordForms/ForgotPasswordFormStepFour";
 
 export {
   PrivateRoute,
@@ -18,4 +21,7 @@ export {
   RegisterFormStepFour,
   RegisterFormStepFive,
   ForgotPasswordFormStepOne,
+  ForgotPasswordFormStepTwo,
+  ForgotPasswordFormStepThree,
+  ForgotPasswordFormStepFour,
 };
