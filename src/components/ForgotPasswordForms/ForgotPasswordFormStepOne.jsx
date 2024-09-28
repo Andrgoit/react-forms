@@ -9,10 +9,10 @@ import Filled_Warning from "src/assets/icons/Icon_Filled_Error.svg?react";
 const validate = (values) => {
   const errors = {};
 
-  if (!values.email) {
+  if (!values.login) {
     errors.login = "This field cannot be empty";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.login)) {
+    errors.login = "Invalid email address";
   }
 
   return errors;
@@ -26,21 +26,15 @@ export default function ForgotPasswordFormStepOne({
   const generatedCode = randomNumbersGenerator();
 
   const formik = useFormik({
-    initialValues: { email: "test@test.com" },
+    initialValues: { login: "" },
     validate,
     onSubmit: (values) => {
       updateData(values);
-      console.log(values);
-
-      // formik.resetForm({
-      //   login: "",
-      //   password: "",
-      // });
     },
   });
 
   const handlerOnclickResetPasswordBtn = (code) => {
-    toast.success(`<${formik.values.email}>:Your code: ${code}`);
+    toast.success(`<${formik.values.login}>:Your code: ${code}`);
     getCodeNumber(code);
   };
   return (
@@ -64,26 +58,26 @@ export default function ForgotPasswordFormStepOne({
         <div className="w-full">
           <div className="relative w-full">
             <input
-              id="email"
-              name="email"
+              id="login"
+              name="login"
               type="email"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.email}
+              value={formik.values.login}
               // autoComplete="off"
-              className={`w-full rounded-lg border ${formik.values.email ? "[&+label]:top-2 [&:valid+label]:text-xs" : ""} border-[#A5A8BA] p-4 text-black outline-[#6168E4] transition-all duration-300 [&:focus+label]:top-2 [&:focus+label]:text-xs ${formik.touched.email && formik.errors.email ? "border-[2px] border-red-600" : "border-[2px] border-[#6168E4]"} `}
+              className={`w-full rounded-lg border ${formik.values.login ? "[&+label]:top-2 [&:valid+label]:text-xs" : ""} border-[#A5A8BA] p-4 text-black outline-[#6168E4] transition-all duration-300 [&:focus+label]:top-2 [&:focus+label]:text-xs ${formik.touched.login && formik.errors.login ? "border-[2px] border-red-600" : "border-[2px] border-[#6168E4]"} `}
             />
             <label
-              htmlFor="email"
+              htmlFor="login"
               className="absolute left-4 top-1/2 translate-y-[-50%] text-[#65697E] transition-all duration-300"
             >
               Email
             </label>
           </div>
-          {formik.touched.email && formik.errors.email ? (
+          {formik.touched.login && formik.errors.login ? (
             <div className="flex items-center gap-1 text-xs text-red-600">
               <Filled_Warning />
-              {formik.errors.email}
+              {formik.errors.login}
             </div>
           ) : null}
         </div>

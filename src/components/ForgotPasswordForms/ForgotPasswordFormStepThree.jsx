@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import Filled_Warning from "src/assets/icons/Icon_Filled_Error.svg?react";
@@ -49,12 +48,7 @@ export default function ForgotPasswordFormStepThree({ updateData, nextStep }) {
     }
   };
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8 }}
-      className="flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-5 rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm"
-    >
+    <div className="flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-5 rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm">
       <p className="text-xl">Password reset</p>
 
       <h2 className="text-2xl font-bold text-black">Create new password</h2>
@@ -77,7 +71,7 @@ export default function ForgotPasswordFormStepThree({ updateData, nextStep }) {
               htmlFor="password"
               className="absolute left-4 top-1/2 translate-y-[-50%] text-[#65697E] transition-all duration-300"
             >
-              Password <span className="text-red-600">*</span>
+              Password
             </label>
             <div
               className="absolute right-3 top-1/2 translate-y-[-50%]"
@@ -118,7 +112,7 @@ export default function ForgotPasswordFormStepThree({ updateData, nextStep }) {
               htmlFor="confirmPassword"
               className="absolute left-4 top-1/2 translate-y-[-50%] text-[#65697E] transition-all duration-300"
             >
-              Confirm password <span className="text-red-600">*</span>
+              Confirm password
             </label>
             <div
               className="absolute right-3 top-1/2 translate-y-[-50%]"
@@ -146,6 +140,6 @@ export default function ForgotPasswordFormStepThree({ updateData, nextStep }) {
           Save password
         </button>
       </form>
-    </motion.div>
+    </div>
   );
 }

@@ -3,7 +3,10 @@ import ok from "src/assets/icons/ok.png";
 import uploadIcon from "src/assets/icons/uploadIcon.png";
 import profileIcon from "src/assets/icons/profileUser.svg";
 
-export default function RegisterFormStepTwo({ nextStep, updateData }) {
+export default function RegisterFormStepTwo({
+  nextStep,
+  updateRegistrationData,
+}) {
   const [avatar, setAvatar] = useState(null);
   const [imageURL, setImageURL] = useState(null);
 
@@ -14,7 +17,6 @@ export default function RegisterFormStepTwo({ nextStep, updateData }) {
 
   const handlerOnChangeInput = (e) => {
     const file = e.target.files[0];
-    console.log("file", file);
     setAvatar(file);
     fileReader.readAsDataURL(file);
   };
@@ -24,7 +26,7 @@ export default function RegisterFormStepTwo({ nextStep, updateData }) {
   };
 
   const handlerSubmitBtn = () => {
-    updateData({
+    updateRegistrationData({
       avatar,
       imageURL,
     });

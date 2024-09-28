@@ -3,7 +3,6 @@ import editIcon from "src/assets/icons/editButton.png";
 import profileIcon from "src/assets/icons/profileUser.svg";
 
 export default function RegisterFormStepThree({ nextStep, prevStep, data }) {
-  console.log("data RegisterFormStepThree", data);
   const { imageURL } = data;
 
   return (

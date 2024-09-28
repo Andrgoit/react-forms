@@ -7,7 +7,7 @@ import {
   ForgotPasswordFormStepFour,
 } from "src/components";
 
-export default function ForgotPasswordPage() {
+export default function ForgotPasswordPage({ updatePassword }) {
   const [step, setStep] = useState(0);
   const [data, setData] = useState(null);
   const [code, setCode] = useState(null);
@@ -15,7 +15,6 @@ export default function ForgotPasswordPage() {
   console.log("data", data);
 
   const getCodeNumber = (code) => setCode(code);
-  console.log("code", code);
 
   const updateData = (newData) => {
     setData((prev) => ({ ...prev, ...newData }));
@@ -23,6 +22,10 @@ export default function ForgotPasswordPage() {
 
   const handlerClickNextStep = () => {
     setStep((prev) => prev + 1);
+  };
+
+  const finishUpdatePassword = () => {
+    updatePassword(data);
   };
 
   return (
@@ -50,8 +53,7 @@ export default function ForgotPasswordPage() {
       ) : null}
       {step === 3 ? (
         <ForgotPasswordFormStepFour
-          nextStep={handlerClickNextStep}
-          updateData={updateData}
+          finishUpdatePassword={finishUpdatePassword}
         />
       ) : null}
     </div>

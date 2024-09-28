@@ -7,7 +7,10 @@ import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import Filled_Warning from "src/assets/icons/Icon_Filled_Error.svg?react";
 import errorIcon from "src/assets/icons/Error.png";
 
-export default function RegisterFormStepOne({ nextStep, updateData }) {
+export default function RegisterFormStepOne({
+  nextStep,
+  updateRegistrationData,
+}) {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const [isClickedContinueBtn, setIsClickedContinueBtn] = useState(false);
@@ -19,8 +22,8 @@ export default function RegisterFormStepOne({ nextStep, updateData }) {
 
     if (!values.login) {
       errors.login = "This field cannot be empty";
-    } else if (values.login.length < 3) {
-      errors.login = "Must be 3 characters or more";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.login)) {
+      errors.login = "Invalid email address";
     }
 
     if (!values.firstName) {
@@ -64,15 +67,8 @@ export default function RegisterFormStepOne({ nextStep, updateData }) {
       console.log(values);
 
       setIsClickedContinueBtn(false);
-      updateData(values);
+      updateRegistrationData(values);
       nextStep();
-      // formik.resetForm({
-      //   login: "",
-      //   firstName: "",
-      //   lastName: "",
-      //   password: "",
-      //   confirmPassword: "",
-      // });
     },
   });
 
@@ -122,7 +118,7 @@ export default function RegisterFormStepOne({ nextStep, updateData }) {
             <input
               id="login"
               name="login"
-              type="text"
+              type="email"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.login}

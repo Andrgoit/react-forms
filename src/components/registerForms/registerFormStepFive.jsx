@@ -1,6 +1,6 @@
 import success from "src/assets/image/Success.png";
 
-export default function RegisterFormStepFive({ onRegister }) {
+export default function RegisterFormStepFive({ finalStepOfRegistration }) {
   return (
     <div className="flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-5 rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm">
       <p className="text-xl">Sign up</p>
@@ -17,7 +17,7 @@ export default function RegisterFormStepFive({ onRegister }) {
           Fill in profile details
         </button>
         <button
-          onClick={onRegister}
+          onClick={finalStepOfRegistration}
           type="button"
           className="inline-block w-full max-w-full cursor-pointer rounded-lg border border-[#6168E4] bg-transparent py-4 text-[#6168E4] transition-colors duration-300 hover:bg-[#6168E4] hover:text-white"
         >

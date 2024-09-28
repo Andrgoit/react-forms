@@ -12,8 +12,14 @@ import { PrivateRoute, PublicRoute } from "./components";
 import { useState } from "react";
 
 function App() {
-  const [user, setUser] = useState(false);
-  const handlerRegisteredUser = () => setUser(true);
+  const [user, setUser] = useState(null);
+
+  const handlerUserRegistration = (user) => setUser(user);
+
+  const handlerUpdatePassword = (newData) => {
+    setUser((prev) => ({ ...prev, ...newData }));
+  };
+  console.log("user App", user);
 
   const router = createBrowserRouter([
     {
@@ -29,9 +35,12 @@ function App() {
         { path: "/login", element: <LoginPage /> },
         {
           path: "/register",
-          element: <RegisterPage onRegister={handlerRegisteredUser} />,
+          element: <RegisterPage userRegistration={handlerUserRegistration} />,
         },
-        { path: "/forgotPassword", element: <ForgoPasswordPage /> },
+        {
+          path: "/forgotPassword",
+          element: <ForgoPasswordPage updatePassword={handlerUpdatePassword} />,
+        },
       ],
     },
   ]);

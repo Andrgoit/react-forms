@@ -7,7 +7,7 @@ import {
   RegisterFormStepFive,
 } from "src/components";
 
-export default function RegisterPage({ onRegister }) {
+export default function RegisterPage({ userRegistration }) {
   const [step, setStep] = useState(0);
   const [data, setData] = useState({});
 
@@ -18,10 +18,12 @@ export default function RegisterPage({ onRegister }) {
     setStep((prev) => prev - 1);
   };
 
-  const handlerUpdateData = (newData) => {
-    console.log("newData", newData);
-
+  const handlerUpdateRegistrationData = (newData) => {
     setData((prev) => ({ ...prev, ...newData }));
+  };
+
+  const finalStepOfRegistration = () => {
+    userRegistration(data);
   };
 
   return (
@@ -29,14 +31,14 @@ export default function RegisterPage({ onRegister }) {
       {step === 0 ? (
         <RegisterFormStepOne
           nextStep={handlerClickNextStep}
-          updateData={handlerUpdateData}
+          updateRegistrationData={handlerUpdateRegistrationData}
         />
       ) : null}
       {step === 1 ? (
         <RegisterFormStepTwo
           nextStep={handlerClickNextStep}
           prevStep={handlerClickPrevStep}
-          updateData={handlerUpdateData}
+          updateRegistrationData={handlerUpdateRegistrationData}
         />
       ) : null}
       {step === 2 ? (
@@ -49,10 +51,14 @@ export default function RegisterPage({ onRegister }) {
       {step === 3 ? (
         <RegisterFormStepFour
           nextStep={handlerClickNextStep}
-          updateData={handlerUpdateData}
+          updateRegistrationData={handlerUpdateRegistrationData}
         />
       ) : null}
-      {step === 4 ? <RegisterFormStepFive onRegister={onRegister} /> : null}
+      {step === 4 ? (
+        <RegisterFormStepFive
+          finalStepOfRegistration={finalStepOfRegistration}
+        />
+      ) : null}
     </div>
   );
 }

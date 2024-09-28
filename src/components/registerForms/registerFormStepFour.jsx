@@ -3,19 +3,27 @@ import { useFormik } from "formik";
 
 import ok from "src/assets/icons/ok.png";
 
-export default function RegisterFormStepFour({ nextStep, updateData }) {
+import linkedin from "src/assets/icons/linkedin.svg";
+import instagram from "src/assets/icons/instagram.svg";
+import telegram from "src/assets/icons/telegram.svg";
+import facebook from "src/assets/icons/facebook.svg";
+import skype from "src/assets/icons/skype.svg";
+
+export default function RegisterFormStepFour({
+  nextStep,
+  updateRegistrationData,
+}) {
   const formik = useFormik({
     initialValues: {
       linkedin: "http://linkedin.com",
-      instagram: "http://instagram.com",
-      telegram: "http://telegram.com",
-      facebook: "http://facebook.com",
-      skype: "https://join.skype.com/invite",
+      instagram: "http://linkedin.com",
+      telegram: "http://linkedin.com",
+      facebook: "http://linkedin.com",
+      skype: "http://linkedin.com",
     },
 
     onSubmit: (values) => {
-      console.log(values);
-      updateData(values);
+      updateRegistrationData(values);
       nextStep();
     },
   });
@@ -43,7 +51,8 @@ export default function RegisterFormStepFour({ nextStep, updateData }) {
         onSubmit={formik.handleSubmit}
         className="flex w-full flex-col gap-4"
       >
-        <div className="w-full">
+        <div className="flex w-full items-center gap-3">
+          <img src={linkedin} alt="linkedin icon" />
           <div className="relative w-full">
             <input
               id="linkedin"
@@ -64,7 +73,8 @@ export default function RegisterFormStepFour({ nextStep, updateData }) {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="flex w-full items-center gap-3">
+          <img src={instagram} alt="instagram icon" />
           <div className="relative w-full">
             <input
               id="instagram"
@@ -85,7 +95,8 @@ export default function RegisterFormStepFour({ nextStep, updateData }) {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="flex w-full items-center gap-3">
+          <img src={telegram} alt="telegram icon" />
           <div className="relative w-full">
             <input
               id="telegram"
@@ -106,7 +117,8 @@ export default function RegisterFormStepFour({ nextStep, updateData }) {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="flex w-full items-center gap-3">
+          <img src={facebook} alt="facebook icon" />
           <div className="relative w-full">
             <input
               id="facebook"
@@ -127,7 +139,8 @@ export default function RegisterFormStepFour({ nextStep, updateData }) {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="flex w-full items-center gap-3">
+          <img src={skype} alt="skype icon" />
           <div className="relative w-full">
             <input
               id="skype"
