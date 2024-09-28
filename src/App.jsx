@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./index.css";
 import {
   HomePage,
@@ -9,7 +11,6 @@ import {
 } from "./pages";
 
 import { PrivateRoute, PublicRoute } from "./components";
-import { useState } from "react";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -20,6 +21,12 @@ function App() {
     setUser((prev) => ({ ...prev, ...newData }));
   };
   console.log("user App", user);
+
+  const handlerUserLogination = (loginingUser) => {
+    if (user?.login !== loginingUser.login) {
+      toast.error(`User not found. Please Sign up!`, { autoClose: 3000 });
+    }
+  };
 
   const router = createBrowserRouter([
     {
@@ -32,7 +39,10 @@ function App() {
       element: <PublicRoute user={user} />,
       errorElement: <NotFoundPage />,
       children: [
-        { path: "/login", element: <LoginPage /> },
+        {
+          path: "/login",
+          element: <LoginPage userLogination={handlerUserLogination} />,
+        },
         {
           path: "/register",
           element: <RegisterPage userRegistration={handlerUserRegistration} />,

@@ -13,8 +13,8 @@ const validate = (values) => {
 
   if (!values.login) {
     errors.login = "This field cannot be empty";
-  } else if (values.login.length < 3) {
-    errors.login = "Must be 3 characters or more";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.login)) {
+    errors.login = "Invalid email address";
   }
 
   if (!values.password) {
@@ -26,16 +26,14 @@ const validate = (values) => {
   return errors;
 };
 
-export default function LoginForm() {
-  // eslint-disable-next-line no-unused-vars
-  const [data, setData] = useState({ login: "", password: "" });
+export default function LoginForm({ userLogination }) {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const formik = useFormik({
-    initialValues: data,
+    initialValues: { login: "", password: "" },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      userLogination(values);
 
       formik.resetForm({
         login: "",
@@ -52,7 +50,7 @@ export default function LoginForm() {
       className="flex h-full w-full max-w-[400px] flex-col items-center justify-center gap-5 rounded-xl bg-white px-4 py-5 shadow-xl backdrop-blur-sm"
     >
       <p className="text-xl">Log in</p>
-      <img src={logo} alt="" />
+      <img src={logo} alt="logo" />
       <h1 className="text-3xl font-bold">U-pamers</h1>
       <p className="text-center text-base text-[#65697E]">
         Log in to expand your social network and communicate with colleagues.
@@ -66,7 +64,7 @@ export default function LoginForm() {
             <input
               id="login"
               name="login"
-              type="text"
+              type="email"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.login}

@@ -34,7 +34,9 @@ export default function ForgotPasswordFormStepOne({
   });
 
   const handlerOnclickResetPasswordBtn = (code) => {
-    toast.success(`<${formik.values.login}>:Your code: ${code}`);
+    toast.success(`<${formik.values.login}>:Your code: ${code}`, {
+      autoClose: false,
+    });
     getCodeNumber(code);
   };
   return (
