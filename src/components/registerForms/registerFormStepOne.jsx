@@ -10,6 +10,7 @@ import errorIcon from "src/assets/icons/Error.png";
 export default function RegisterFormStepOne({
   nextStep,
   updateRegistrationData,
+  localUsers,
 }) {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
@@ -17,12 +18,18 @@ export default function RegisterFormStepOne({
   const [errors, setErrors] = useState(false);
   const errorCounts = Object.keys(errors).length;
 
+  console.log("localUsers", localUsers);
+
   const validate = (values) => {
     const errors = {};
 
     if (!values.login) {
       errors.login = "This field cannot be empty";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.login)) {
+    }
+    if (localUsers?.find(({ login }) => login === values.login)) {
+      errors.login = "User already exist";
+    }
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.login)) {
       errors.login = "Invalid email address";
     }
 

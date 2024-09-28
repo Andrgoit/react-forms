@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import success from "src/assets/image/Success.png";
 
 export default function RegisterFormStepFive({ finalStepOfRegistration }) {
@@ -10,19 +11,19 @@ export default function RegisterFormStepFive({ finalStepOfRegistration }) {
         Fill in your profile details to introduce yourself to other U-pamers.
       </span>
       <div className="flex w-full flex-col gap-4">
-        <button
-          type="button"
-          className="inline-block w-full max-w-full cursor-pointer rounded-lg border bg-[#6168E4] py-4 text-white transition-colors duration-300 hover:border hover:border-[#6168E4] hover:bg-transparent hover:text-[#6168E4]"
+        <Link
+          to="#"
+          className="inline-block w-full max-w-full cursor-pointer rounded-lg border bg-[#6168E4] py-4 text-center text-white transition-colors duration-300 hover:border hover:border-[#6168E4] hover:bg-transparent hover:text-[#6168E4]"
         >
           Fill in profile details
-        </button>
-        <button
+        </Link>
+
+        <Link
           onClick={finalStepOfRegistration}
-          type="button"
-          className="inline-block w-full max-w-full cursor-pointer rounded-lg border border-[#6168E4] bg-transparent py-4 text-[#6168E4] transition-colors duration-300 hover:bg-[#6168E4] hover:text-white"
+          className="inline-block w-full max-w-full cursor-pointer rounded-lg border border-[#6168E4] bg-transparent py-4 text-center text-[#6168E4] transition-colors duration-300 hover:bg-[#6168E4] hover:text-white"
         >
-          Go to the Chat
-        </button>
+          Go to the Profile
+        </Link>
       </div>
     </div>
   );

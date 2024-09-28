@@ -12,8 +12,6 @@ export default function ForgotPasswordPage({ updatePassword }) {
   const [data, setData] = useState(null);
   const [code, setCode] = useState(null);
 
-  console.log("data", data);
-
   const getCodeNumber = (code) => setCode(code);
 
   const updateData = (newData) => {

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { MdLogout } from "react-icons/md";
 
 import userIcon from "src/assets/icons/profileUser.svg";
 import linkedinIcon from "src/assets/icons/linkedin.svg";
@@ -7,7 +8,7 @@ import telegramIcon from "src/assets/icons/telegram.svg";
 import facebookIcon from "src/assets/icons/facebook.svg";
 import skypeIcon from "src/assets/icons/skype.svg";
 
-export default function HomePage({ user = {} }) {
+export default function HomePage({ user = {}, handlerLogoutUser }) {
   const {
     login,
     firstName,
@@ -71,6 +72,13 @@ export default function HomePage({ user = {} }) {
                 <p>Skype: {skype}</p>
               </div>
             )}
+
+            <button
+              onClick={handlerLogoutUser}
+              className="flex w-full max-w-full cursor-pointer items-center justify-center gap-2 rounded-lg border bg-[#6168E4] py-4 text-center text-white transition-colors duration-300 hover:bg-[#3d43b9]"
+            >
+              Logout <MdLogout size={28} />
+            </button>
           </div>
         </div>
       </motion.div>

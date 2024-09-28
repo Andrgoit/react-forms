@@ -23,6 +23,7 @@ export default function RegisterFormStepFour({
     },
 
     onSubmit: (values) => {
+      console.log("values step 4", values);
       updateRegistrationData(values);
       nextStep();
     },
@@ -162,7 +163,6 @@ export default function RegisterFormStepFour({
         </div>
 
         <button
-          onClick={() => 5}
           type="submit"
           className="mt-8 inline-block w-full max-w-full cursor-pointer rounded-lg border bg-[#6168E4] py-4 text-white transition-colors duration-300 hover:bg-[#3d43b9]"
         >

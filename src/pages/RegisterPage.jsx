@@ -7,7 +7,7 @@ import {
   RegisterFormStepFive,
 } from "src/components";
 
-export default function RegisterPage({ userRegistration }) {
+export default function RegisterPage({ userRegistration, localUsers }) {
   const [step, setStep] = useState(0);
   const [data, setData] = useState({});
 
@@ -30,6 +30,7 @@ export default function RegisterPage({ userRegistration }) {
     <div className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-gradient-to-br from-[#1ce08e] to-[#000851]">
       {step === 0 ? (
         <RegisterFormStepOne
+          localUsers={localUsers}
           nextStep={handlerClickNextStep}
           updateRegistrationData={handlerUpdateRegistrationData}
         />
