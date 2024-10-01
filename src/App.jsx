@@ -15,7 +15,6 @@ import { PrivateRoute, PublicRoute } from "./components";
 function App() {
   const [user, setUser] = useState(null);
   const [localUsers, setLocalUsers] = useState();
-  console.log("user App", user);
 
   const savedUsers = localStorage.getItem("registeredUsers");
   const loginedUser = localStorage.getItem("loginedUser");
@@ -24,7 +23,7 @@ function App() {
     if (savedUsers) {
       try {
         const parsedUsers = JSON.parse(savedUsers);
-        console.log("parsedUsers", parsedUsers);
+
         setLocalUsers(parsedUsers);
       } catch (error) {
         console.log("parse error", error);
@@ -36,7 +35,6 @@ function App() {
     if (loginedUser) {
       try {
         const parsedUser = JSON.parse(loginedUser);
-        console.log("parsedUser", parsedUser);
         setUser(parsedUser);
       } catch (error) {
         console.log("parse error", error);
@@ -51,7 +49,6 @@ function App() {
   }, [user]);
 
   const handlerUserRegistration = (user) => {
-    console.log("user", user);
     setUser(user);
 
     if (savedUsers) {
@@ -69,8 +66,16 @@ function App() {
     return;
   };
 
-  const handlerUpdatePassword = (newData) => {
-    setUser((prev) => ({ ...prev, ...newData }));
+  const handlerUpdatePassword = (newPass) => {
+    const { login } = newPass;
+
+    if (localUsers) {
+      const existUser = localUsers.find((user) => user.login === login);
+      const updatedUser = { ...existUser, ...newPass };
+      const index = localUsers.findIndex((user) => user.login === login);
+      localUsers.splice(index, 1, updatedUser);
+      localStorage.setItem("registeredUsers", JSON.stringify(localUsers));
+    }
   };
 
   const handlerUserLogination = (loginingUser) => {
@@ -127,7 +132,12 @@ function App() {
         },
         {
           path: "/forgotPassword",
-          element: <ForgoPasswordPage updatePassword={handlerUpdatePassword} />,
+          element: (
+            <ForgoPasswordPage
+              updatePassword={handlerUpdatePassword}
+              localUsers={localUsers}
+            />
+          ),
         },
       ],
     },

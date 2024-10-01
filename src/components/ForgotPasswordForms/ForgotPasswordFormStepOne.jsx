@@ -6,29 +6,33 @@ import randomNumbersGenerator from "src/utils/randomNumbersGenerator";
 
 import Filled_Warning from "src/assets/icons/Icon_Filled_Error.svg?react";
 
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.login) {
-    errors.login = "This field cannot be empty";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.login)) {
-    errors.login = "Invalid email address";
-  }
-
-  return errors;
-};
-
 export default function ForgotPasswordFormStepOne({
   nextStep,
   getCodeNumber,
   updateData,
+  localUsers,
 }) {
   const generatedCode = randomNumbersGenerator();
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.login) {
+      errors.login = "This field cannot be empty";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.login)) {
+      errors.login = "Invalid email address";
+    } else if (!localUsers.find((user) => user.login === values.login)) {
+      errors.login = "User not found";
+    }
+
+    return errors;
+  };
 
   const formik = useFormik({
     initialValues: { login: "" },
     validate,
     onSubmit: (values) => {
+      handlerOnclickResetPasswordBtn(generatedCode);
       updateData(values);
     },
   });
@@ -86,7 +90,6 @@ export default function ForgotPasswordFormStepOne({
 
         <button
           type="submit"
-          onClick={() => handlerOnclickResetPasswordBtn(generatedCode)}
           className="mt-8 inline-block w-full max-w-full cursor-pointer rounded-lg border bg-[#6168E4] py-4 text-white transition-colors duration-300 hover:bg-[#3d43b9]"
         >
           Reset password
